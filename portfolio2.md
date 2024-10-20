@@ -12,6 +12,12 @@ bridge_00    20.24.21.0/24
 bridge_01    21.24.21.0/24
 bridge_lb    22.24.21.0/24
 
+### Commands voor het maken van de bridges
+
+    docker network create --driver=bridge --subnet=20.24.21.0/24 --ip-range=20.24.21.0/24 --gateway=20.24.21.1 bridge_00
+    docker network create --driver=bridge --subnet=21.24.21.0/24 --ip-range=21.24.21.0/24 --gateway=21.24.21.1 bridge_01
+    docker network create --driver=bridge --subnet=22.24.21.0/24 --ip-range=22.24.21.0/24 --gateway=22.24.21.1 bridge_lb
+
 Deze kunnen niet met elkaar praten maar de onderliggende host kan wel alle hosts op alle bridges bereiken.
 
 ## NGINX Loadbalancing / Reverse proxy
@@ -22,7 +28,15 @@ Als er geen algoritme wordt gekozen wordt er automatisch gebruikt gemaakt van ro
 
 NGINX wordt gebruikt als loadbalancing (nginx_lb) voor de 2 webservers; nginx_1 en nginx_2
 
+https://youtu.be/Q8BYaq5SM8M < Zie het in actie
 
+## Container starting commands
+
+    docker run --privileged --name nginx_1 --ip 20.24.21.10 --network bridge_00 -p 80:80 -itd --rm nginx
+    docker run --privileged --name nginx_2 --ip 21.24.21.10 --network bridge_01 -p 81:80 -itd --rm nginx
+    docker run --privileged --name nginx_lb --ip 22.24.21.10 --network bridge_02 -p 8080:80 -itd --rm nginx
+
+    
 
 
 
