@@ -29,5 +29,7 @@ NGINX wordt gebruikt als loadbalancing (nginx_lb) voor de 2 webservers; nginx_1 
 Geraadpleegde bronnen:
 
 https://dev.to/mazenr/how-to-implement-a-load-balancer-using-nginx-docker-4g73
+
 https://docs.docker.com/engine/network/drivers/bridge/
+
 https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Docker-Nginx-reverse-proxy-setup-example
